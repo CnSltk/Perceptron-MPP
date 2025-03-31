@@ -47,7 +47,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("model.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\cansa\\PycharmProjects\\PyMPPplotter\\model.txt"))) {
             if (perceptron != null) {
                 double[] weights = perceptron.getWeights();
                 double threshold = perceptron.getThreshold();
