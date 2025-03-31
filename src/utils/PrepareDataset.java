@@ -77,11 +77,12 @@ private static DatasetSplit stratifiedSplit(List<double[]> class0, List<double[]
                 testLabels.add(1);
             }
         }
-        DatasetSplit split = new DatasetSplit();
-        split.trainInputs = trainInputs.toArray(new double[0][0]);
-        split.trainLabels = trainLabels.stream().mapToInt(i -> i).toArray();
-        split.testInputs = trainInputs.toArray(new double[0][0]);
-        split.testLabels = testLabels.stream().mapToInt(i -> i).toArray();
-        return split;
+    DatasetSplit split = new DatasetSplit();
+    split.trainInputs = trainInputs.toArray(new double[0][0]);
+    split.trainLabels = trainLabels.stream().mapToInt(i -> i).toArray();
+    split.testInputs = testInputs.toArray(new double[0][0]); // ✅ Fixed
+    split.testLabels = testLabels.stream().mapToInt(i -> i).toArray();
+    return split;
+
 }
 }

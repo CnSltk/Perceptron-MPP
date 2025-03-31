@@ -31,19 +31,21 @@ public class Perceptron {
 
         while (epoch < maxEpochs){
             int correct = 0;
-            for(int i = 0 ; i <numSamples; i++){
+            for(int i = 0 ; i < numSamples; i++){
                 int prediction = predict(inputs[i]);
                 int error = labels[i] - prediction;
 
                 //weight update
                 for (int j = 0; j < weights.length; j++){
-                    weights[j] += alpha*error*inputs[i][j];
+                    weights[j] += alpha * error * inputs[i][j];
                 }
                 if (error == 0) correct++;
             }
-            epochAccuracies[epoch] = (double)correct / (double)numSamples;
-            if (correct == numSamples) break;
+            if (epoch < epochAccuracies.length){
+                epochAccuracies[epoch] = (double) correct / (double) numSamples;
+            }
             epoch++;
+            if(correct == numSamples) break;
         }
         return epoch;
     }
