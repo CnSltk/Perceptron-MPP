@@ -57,36 +57,39 @@ public class Main {
                 }
                 writer.write("," + threshold);
                 writer.newLine();
-
                 System.out.println("\nModel parameters saved to model.txt.");
-                // User interface to predict a new observation
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("\nEnter a new flower observation to classify:");
+                System.out.println("Enter 1 if you want to predict a class aswell, if not enter 0: ");
+                int exitOrNot = scanner.nextInt();
+                if (exitOrNot == 1) {
+                    System.out.println("\nEnter a new flower observation to classify:");
 
-                System.out.print("Sepal Length (cm): ");
-                double sepalLength = scanner.nextDouble();
+                    System.out.print("Sepal Length (cm): ");
+                    double sepalLength = scanner.nextDouble();
 
-                System.out.print("Sepal Width (cm): ");
-                double sepalWidth = scanner.nextDouble();
+                    System.out.print("Sepal Width (cm): ");
+                    double sepalWidth = scanner.nextDouble();
 
-                System.out.print("Petal Length (cm): ");
-                double petalLength = scanner.nextDouble();
+                    System.out.print("Petal Length (cm): ");
+                    double petalLength = scanner.nextDouble();
 
-                System.out.print("Petal Width (cm): ");
-                double petalWidth = scanner.nextDouble();
+                    System.out.print("Petal Width (cm): ");
+                    double petalWidth = scanner.nextDouble();
 
 // Prepare input
-                double[] userInput = new double[]{sepalLength, sepalWidth, petalLength, petalWidth};
+                    double[] userInput = new double[]{sepalLength, sepalWidth, petalLength, petalWidth};
 
 // Make prediction
-                int userPrediction = perceptron.predict(userInput);
-                System.out.println("Prediction: " + (userPrediction == 1 ? "Setosa" : "Versicolor"));
+                    int userPrediction = perceptron.predict(userInput);
+                    System.out.println("Prediction: " + (userPrediction == 1 ? "Setosa" : "Versicolor"));
 
-            } else {
-                System.err.println("Perceptron is null. Model not saved.");
+                }
+            }else {
+                    System.err.println("Perceptron is null. Model not saved.");
+                }
+            } catch(IOException e){
+                System.err.println("Failed to save weights: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.err.println("Failed to save weights: " + e.getMessage());
         }
     }
-}
+
