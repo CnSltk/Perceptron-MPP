@@ -47,7 +47,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\cansa\\PycharmProjects\\PyMPPplotter\\model.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\cansa\\PycharmProjects\\PythonPlotPerceptron\\model.txt"))) {
             if (perceptron != null) {
                 double[] weights = perceptron.getWeights();
                 double threshold = perceptron.getThreshold();
@@ -59,6 +59,29 @@ public class Main {
                 writer.newLine();
 
                 System.out.println("\nModel parameters saved to model.txt.");
+                // User interface to predict a new observation
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("\nEnter a new flower observation to classify:");
+
+                System.out.print("Sepal Length (cm): ");
+                double sepalLength = scanner.nextDouble();
+
+                System.out.print("Sepal Width (cm): ");
+                double sepalWidth = scanner.nextDouble();
+
+                System.out.print("Petal Length (cm): ");
+                double petalLength = scanner.nextDouble();
+
+                System.out.print("Petal Width (cm): ");
+                double petalWidth = scanner.nextDouble();
+
+// Prepare input
+                double[] userInput = new double[]{sepalLength, sepalWidth, petalLength, petalWidth};
+
+// Make prediction
+                int userPrediction = perceptron.predict(userInput);
+                System.out.println("Prediction: " + (userPrediction == 1 ? "Setosa" : "Versicolor"));
+
             } else {
                 System.err.println("Perceptron is null. Model not saved.");
             }

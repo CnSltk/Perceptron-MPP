@@ -11,7 +11,7 @@ public class PrepareDataset {
     }
 
     public static DatasetSplit trainTestSplit(String csvPath, double trainRatio) throws IOException {
-        List<double[]> inpputList = new ArrayList<>();
+        List<double[]> inputList = new ArrayList<>();
         List<Integer> labelList = new ArrayList<>();
 
         //load and filter the dataset
@@ -29,7 +29,7 @@ public class PrepareDataset {
                 features[i] = Double.parseDouble(tokens[i]);
             }
             int label = labelStr.equals("setosa") ? 1 : 0;
-            inpputList.add(features);
+            inputList.add(features);
             labelList.add(label);
         }
         br.close();
@@ -38,9 +38,9 @@ public class PrepareDataset {
 
         for (int i = 0; i < labelList.size(); i++) {
             if (labelList.get(i) == 0) {
-                class0Inputs.add(inpputList.get(i));
+                class0Inputs.add(inputList.get(i));
             } else {
-                class1Inputs.add(inpputList.get(i));
+                class1Inputs.add(inputList.get(i));
             }
 
         }
@@ -80,7 +80,7 @@ private static DatasetSplit stratifiedSplit(List<double[]> class0, List<double[]
     DatasetSplit split = new DatasetSplit();
     split.trainInputs = trainInputs.toArray(new double[0][0]);
     split.trainLabels = trainLabels.stream().mapToInt(i -> i).toArray();
-    split.testInputs = testInputs.toArray(new double[0][0]); // ✅ Fixed
+    split.testInputs = testInputs.toArray(new double[0][0]);
     split.testLabels = testLabels.stream().mapToInt(i -> i).toArray();
     return split;
 
